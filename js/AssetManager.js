@@ -1,27 +1,40 @@
 export default class AssetManager {
     constructor() {
-        this.nTotalImg = 0;
+        this.nTotalAssets = 0;
         this.nCarregado = 0;
 
         this.imagens = new Map();
+        this.audios = new Map();
     }
 
     carregaImagem(chave, src) {
         const img = new Image();
         img.addEventListener("load", () => {
-            nCarregado++;
+            this.nCarregado++;
         });
         img.src = src;
         this.imagens.set(chave, img);
-        this.nTotalImg++;
+        this.nTotalAssets++;
     }
     imagem(chave) {
         return this.imagens.get(chave);
     }
+    carregaAudio(chave, src) {
+        const audio = new Audio();
+        audio.addEventListener("loadeddata", () => {
+            this.nCarregado++;
+        });
+        audio.src = src;
+        this.audios.set(chave, audio);
+        this.nTotalAssets++;
+    }
+    audio(chave) {
+        return this.audios.get(chave);
+    }
 
     porcentagemCarregada() {
-        if (this.nTotalImg > 0)
-            return ((this.nCarregado/this.nTotalImg)*100).toFixed(2);
+        if (this.nTotalAssets > 0)
+            return ((this.nCarregado/this.nTotalAssets)*100).toFixed(2);
         return -1;
     }
 }
