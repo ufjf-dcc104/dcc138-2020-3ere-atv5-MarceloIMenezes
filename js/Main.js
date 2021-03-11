@@ -12,7 +12,7 @@ cena.addSprite(s1);
 cena.addSprite(new Sprite({x: 60, vx: -10, color: "blue"}));
 
 cena.iniciarMenu();
-if (asset.porcentagemCarregada() == 100) {
+if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
     cena.parar();
     cena.iniciar();
 
