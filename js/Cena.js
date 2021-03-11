@@ -6,14 +6,22 @@ export default class Cena {
         
         this.t0 = 0;
         this.dt = 0;
+        this.idAnim = null;
+    }
+    iniciar() {
+        this.idAnim = requestAnimationFrame((t) => {this.quadro(t);});
+    }
+    parar() {
+        cancelAnimationFrame(this.idAnim);
     }
     quadro(t) {
-        this.t0 = t0 ?? t;
+        this.t0 = this.t0 ?? t;
         this.dt = (t - this.t0)/1000;
 
-        this.passo();
+        this.passo(this.dt);
         this.desenhaCena();
 
+        this.iniciar();
         this.t0 = t;
     }
     passo(dt) {
@@ -22,7 +30,7 @@ export default class Cena {
         }
     }
     desenhaCena() {
-        this.fillStyle = "black";
+        this.CTX.fillStyle = "black";
         this.CTX.fillRect(0, 0, this.CANVAS.width, this.CANVAS.height);
 
         for (const sprite of this.sprites) {
