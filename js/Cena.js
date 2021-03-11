@@ -1,5 +1,5 @@
 export default class Cena {
-    constructor(canvas, assets=null) {
+    constructor(canvas, assets) {
         this.CANVAS = canvas;
         this.CTX = this.CANVAS.getContext("2d");
         this.sprites = [];
