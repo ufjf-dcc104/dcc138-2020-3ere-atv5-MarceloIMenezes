@@ -3,6 +3,7 @@ export default class Cena {
         this.CANVAS = canvas;
         this.CTX = this.CANVAS.getContext("2d");
         this.sprites = [];
+        this.sprColisao = []; // vetor dos sprites que colidiram
         
         this.t0 = 0;
         this.dt = 0;
@@ -10,15 +11,21 @@ export default class Cena {
     }
     iniciar() {
         this.idAnim = requestAnimationFrame((t) => {this.quadro(t);});
+        this.t0 = null;
+        this.dt = 0;
     }
     parar() {
         cancelAnimationFrame(this.idAnim);
+        this.t0 = null;
+        this.dt = 0;
     }
     quadro(t) {
         this.t0 = this.t0 ?? t;
         this.dt = (t - this.t0)/1000;
 
         this.passo(this.dt);
+        this.verificaColisao()
+        this.removeSprColisao();
         this.desenhaCena();
 
         this.iniciar();
@@ -39,5 +46,28 @@ export default class Cena {
     }
     addSprite(sprite) {
         this.sprites.push(sprite);
+    }
+    verificaColisao() {
+        for (let i=0; i < this.sprites.length - 1; i++) {
+            for (let j= i + 1; j < this.sprites.length; j++) {
+                if (this.sprites[i].isColidindo(this.sprites[j])) {
+                    this.addSprColisao(this.sprites[i], this.sprites[j]);
+                }
+            }
+        }
+    }
+    addSprColisao(sprA, sprB) {
+        if (!this.sprColisao.includes(sprA))
+            this.sprColisao.push(sprA);
+        if (!this.sprColisao.includes(sprB))
+            this.sprColisao.push(sprB);
+    }
+    removeSprColisao() {
+        for (const spr of this.sprColisao) {
+            if (this.sprites.indexOf(spr) >= 0) {
+                this.sprites.splice(spr, 1);
+            }
+        }
+        this.sprColisao = [];
     }
 }

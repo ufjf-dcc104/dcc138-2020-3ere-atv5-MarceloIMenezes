@@ -9,4 +9,13 @@ const s1 = new Sprite();
 cena.addSprite(s1);
 cena.addSprite(new Sprite({x: 60, vx: -10, color: "blue"}));
 
-cena.iniciar();
+document.addEventListener("keydown", (e) => {
+    switch (e.key) {
+        case "p":
+        case "P":
+            cena.parar();
+            break;
+        default:
+            cena.iniciar();
+    }
+});
