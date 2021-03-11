@@ -7,4 +7,6 @@ const cena = new Cena(canvas);
 const s1 = new Sprite();
 
 cena.addSprite(s1);
+cena.addSprite(new Sprite({x: 30, color: "white"}));
+
 cena.desenhaCena();
