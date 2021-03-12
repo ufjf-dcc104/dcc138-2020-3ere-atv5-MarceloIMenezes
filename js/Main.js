@@ -1,14 +1,19 @@
 import AssetManager from "./AssetManager.js";
 import Cena from "./Cena.js";
+import Mapa from "./Mapa.js";
+import Mixer from "./Mixer.js";
 import Sprite from "./Sprite.js";
 
 const canvas = document.querySelector("canvas");
 
-const asset = new AssetManager()
+const asset = new AssetManager();
+const mapa = new Mapa();
+const mixer = new Mixer();
 const cena = new Cena(canvas, asset);
-const s1 = new Sprite();
 
-cena.addSprite(s1);
+cena.configuraMapa(mapa);
+
+cena.addSprite(new Sprite());
 cena.addSprite(new Sprite({x: 60, vx: -10, color: "blue"}));
 
 cena.iniciarMenu();

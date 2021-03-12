@@ -5,6 +5,7 @@ export default class Cena {
         this.sprites = [];
         this.sprColisao = []; // vetor dos sprites que colidiram
         this.assets = assets;
+        this.mapa = null;
 
         this.t0 = 0;
         this.dt = 0;
@@ -62,8 +63,10 @@ export default class Cena {
         this.t0 = t;
     }
     desenhaCena() {
-        this.CTX.fillStyle = "black";
+        this.CTX.fillStyle = "grey";
         this.CTX.fillRect(0, 0, this.CANVAS.width, this.CANVAS.height);
+
+        this.mapa.desenhaTile(this.CTX);
 
         for (const sprite of this.sprites) {
             sprite.desenhaSprite(this.CTX);
@@ -94,5 +97,8 @@ export default class Cena {
             }
         }
         this.sprColisao = [];
+    }
+    configuraMapa(mapa) {
+        this.mapa = mapa;
     }
 }
