@@ -8,14 +8,20 @@ export default class Sprite {
         this.vy = vy;
         this.color = color;
         this.cena = cena;
-        this.gridX = 0;
-        this.gridY = 0;
+        this.gridSX = 0; //grid onde a ponta sup esq do bloco esta
+        this.gridSY = 0;
+        this.gridIX = 0; //grid onde a ponta inf dir do bloco esta
+        this.gridIY = 0; 
     }
     movimento(dt) {
         this.x = this.x + this.vx*dt;
         this.y = this.y + this.vy*dt;
-        this.gridX = Math.floor(this.x / (this.cena?.mapa.SIZE ?? 1));
-        this.gridY = Math.floor(this.y / (this.cena?.mapa.SIZE ?? 1));
+
+        this.gridSX = Math.floor((this.x - this.w/2) / (this.cena?.mapa.SIZE ?? 1));
+        this.gridSY = Math.floor((this.y - this.h/2) / (this.cena?.mapa.SIZE ?? 1));
+        this.gridIX = Math.floor((this.x + this.w/2) / (this.cena?.mapa.SIZE ?? 1));
+        this.gridIY = Math.floor((this.y + this.h/2) / (this.cena?.mapa.SIZE ?? 1));
+        
         this.bateuParede(dt);
     }
 
@@ -32,17 +38,14 @@ export default class Sprite {
         );
     }
     bateuParede(dt) {
-        this.bateuEsquerda(this.gridX + 1, this.gridY - 1);
-        this.bateuEsquerda(this.gridX + 1, this.gridY);
-        this.bateuEsquerda(this.gridX + 1, this.gridY + 1);
-
-        this.bateuDireita(this.gridX - 1, this.gridY - 1);
-        this.bateuDireita(this.gridX - 1, this.gridY);
-        this.bateuDireita(this.gridX - 1, this.gridY + 1);
-
-        this.bateuBaixo(this.gridX, this.gridY - 1);
-
-        this.bateuCima(this.gridX, this.gridY + 1);
+        for (let i = this.gridSY; i <= this.gridIY; i++) {
+            this.bateuEsquerda(this.gridIX, i);
+            this.bateuDireita(this.gridSX, i);
+        }
+        for (let i = this.gridSX; i <= this.gridIX; i++) {
+            this.bateuBaixo(i, this.gridSY);
+            this.bateuCima(i, this.gridIY);
+        }
 
     }
     bateuEsquerda(prGridX, prGridY) {
