@@ -18,8 +18,11 @@ mapa.carregaMapa(mapa1);
 
 cena.configuraMapa(mapa);
 
-cena.addSprite(new Sprite({cena: cena}));
-cena.addSprite(new Sprite({x: 60, vx: -10, color: "blue", cena: cena}));
+cena.addSprite(new Sprite({x: 120, y: 80, cena: cena}));
+cena.addSprite(new Sprite({x: 400, y:120, vx: -50, color: "blue", cena: cena}));
+cena.addSprite(new Sprite({x: 120, y: 190, vx: 50, h: 150 , cena: cena}));
+cena.addSprite(new Sprite({x: 430, vy: 50, cena: cena}));
+cena.addSprite(new Sprite({vy: -50, cena: cena}));
 
 cena.iniciarMenu();
 if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
