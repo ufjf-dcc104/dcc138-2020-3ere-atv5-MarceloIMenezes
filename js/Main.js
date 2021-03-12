@@ -3,13 +3,18 @@ import Cena from "./Cena.js";
 import Mapa from "./Mapa.js";
 import Mixer from "./Mixer.js";
 import Sprite from "./Sprite.js";
+import {mapa1 as mapa1} from "../maps/mapa1.js";
 
 const canvas = document.querySelector("canvas");
+canvas.width = 16*32;
+canvas.height = 12*32;
 
 const asset = new AssetManager();
-const mapa = new Mapa();
 const mixer = new Mixer();
 const cena = new Cena(canvas, asset);
+
+const mapa = new Mapa();
+mapa.carregaMapa(mapa1);
 
 cena.configuraMapa(mapa);
 
