@@ -93,7 +93,7 @@ export default class Cena {
     removeSprColisao() {
         for (const spr of this.sprColisao) {
             if (this.sprites.indexOf(spr) >= 0) {
-                this.sprites.splice(spr, 1);
+                this.sprites.splice(this.sprites.indexOf(spr), 1);
             }
         }
         this.sprColisao = [];
