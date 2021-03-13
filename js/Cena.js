@@ -79,8 +79,8 @@ export default class Cena {
     }
     geraSpriteRandom() {
         const sizeSpr = 16;
-        const vx = Math.random() * 50;
-        const vy = Math.random() * 50;
+        const vx = Math.random() * (50 + 50) - 50;
+        const vy = Math.random() * (50 + 50) - 50;
 
         while (true) { //procura posicao valida
             var l = Math.floor(Math.random() * (this.mapa.LINHAS - 1) + 1);
