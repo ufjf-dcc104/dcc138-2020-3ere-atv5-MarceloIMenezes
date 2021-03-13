@@ -1,5 +1,5 @@
 export default class Mixer {
-    constructor(nCanais) {
+    constructor(nCanais=10) {
         this.MAXCANAIS = 0;
         this.canais = [];
         this.configuraCanais(nCanais);
@@ -17,12 +17,12 @@ export default class Mixer {
         }
     }
     play(audio) {
-        now = new Date().getTime();
+        const now = new Date().getTime();
         for (let i=0; i<this.MAXCANAIS; i++) {
             const canal = this.canais[i];
             if (canal.fim < now) {
                 canal.audio.src = audio.src;
-                canal.fim = now + audio.duration()*100;
+                canal.fim = now + audio.duration*1000;
                 canal.audio.play();
                 break;
             }

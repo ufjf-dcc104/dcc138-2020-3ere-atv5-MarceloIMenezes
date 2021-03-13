@@ -10,12 +10,15 @@ canvas.width = 16*32;
 canvas.height = 12*32;
 
 const asset = new AssetManager();
-const mixer = new Mixer();
+const mixer = new Mixer(10);
 const cena = new Cena(canvas, asset);
+
+cena.adicionaMixer(mixer);
 
 asset.carregaImagem("tijolo_pedra01", "asset/pedra.jpg");
 asset.carregaImagem("tijolo_pedra02", "asset/tijolo_pedra2.png");
 asset.carregaImagem("tijolo_pedra03", "asset/piso_de_banheiro.png");
+asset.carregaAudio("colisao", "asset/colisao.wav");
 
 const mapa = new Mapa(12, 16, 32);
 mapa.carregaMapa(mapa1);

@@ -8,6 +8,7 @@ export default class Cena {
         this.sprColisao = []; // vetor dos sprites que colidiram
         this.assets = assets;
         this.mapa = null;
+        this.mixer = null;
 
         this.t0 = 0;
         this.dt = 0;
@@ -97,6 +98,7 @@ export default class Cena {
         for (let i=0; i < this.sprites.length - 1; i++) {
             for (let j= i + 1; j < this.sprites.length; j++) {
                 if (this.sprites[i].isColidindo(this.sprites[j])) {
+                    this.mixer.play(this.assets.audio("colisao"));
                     this.addSprColisao(this.sprites[i], this.sprites[j]);
                 }
             }
@@ -118,5 +120,8 @@ export default class Cena {
     }
     configuraMapa(mapa) {
         this.mapa = mapa;
+    }
+    adicionaMixer(mixer) {
+        this.mixer = mixer;
     }
 }
