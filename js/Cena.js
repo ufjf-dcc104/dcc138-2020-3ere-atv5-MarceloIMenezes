@@ -68,7 +68,7 @@ export default class Cena {
         this.CTX.fillStyle = "grey";
         this.CTX.fillRect(0, 0, this.CANVAS.width, this.CANVAS.height);
 
-        this.mapa.desenhaTile(this.CTX);
+        this.mapa.desenhaTile(this.CTX, this.assets);
 
         for (const sprite of this.sprites) {
             sprite.desenhaSprite(this.CTX);

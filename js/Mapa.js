@@ -11,20 +11,18 @@ export default class Mapa {
             }
         }
     }
-    desenhaTile(ctx) {
+    desenhaTile(ctx, asset) {
         for (let i=0; i<this.LINHAS; i++) {
             for (let j=0; j<this.COLUNAS; j++) {
                 switch (this.tiles[i][j]) {
                     case 0:
-                        ctx.linewidth = 1;
-                        ctx.strokeStyle = "white";
-                        ctx.strokeRect(j*this.SIZE, i*this.SIZE, this.SIZE, this.SIZE);
-                        ctx.fillStyle = "black";
-                        ctx.fillRect(j*this.SIZE, i*this.SIZE, this.SIZE, this.SIZE);
+                        ctx.drawImage(asset.imagem("tijolo_pedra03"), j*this.SIZE, i*this.SIZE, this.SIZE, this.SIZE);
                         break;
                     case 1:
-                        ctx.fillStyle = "orange";
-                        ctx.fillRect(j*this.SIZE, i*this.SIZE, this.SIZE, this.SIZE);
+                        ctx.drawImage(asset.imagem("tijolo_pedra02"), j*this.SIZE, i*this.SIZE, this.SIZE, this.SIZE);
+                        ctx.linewidth = 2;
+                        ctx.strokeStyle = "black";
+                        ctx.strokeRect(j*this.SIZE, i*this.SIZE, this.SIZE, this.SIZE);
                         break;
                     default:
                         ctx.fillStyle = "black";
