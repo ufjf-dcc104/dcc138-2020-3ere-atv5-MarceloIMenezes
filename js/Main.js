@@ -29,7 +29,7 @@ if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
         
         cena.geraSpriteRandom();
         vezesRepetidas++;
-        if (vezesRepetidas === 10) {
+        if (vezesRepetidas === 100) {
             clearInterval(repeat); 
         }
     } 
