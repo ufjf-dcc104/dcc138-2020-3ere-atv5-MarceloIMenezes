@@ -13,15 +13,18 @@ const asset = new AssetManager();
 const mixer = new Mixer();
 const cena = new Cena(canvas, asset);
 
+asset.carregaImagem("tijolo_pedra01", "asset/pedra.jpg");
+document.body.appendChild(asset.imagem("tijolo_pedra01"));
+
 const mapa = new Mapa(12, 16, 32);
 mapa.carregaMapa(mapa1);
 cena.configuraMapa(mapa);
 
 
 
-cena.iniciarMenu();
-if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
-    cena.parar();
+//cena.iniciarMenu();
+//if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
+//    cena.parar();
     cena.iniciar();
 
     let vezesRepetidas = 0; 
@@ -45,4 +48,4 @@ if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
                 cena.iniciar();
         }
     });
-}
+//}
