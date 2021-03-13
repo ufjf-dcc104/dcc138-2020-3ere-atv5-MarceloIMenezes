@@ -23,7 +23,17 @@ cena.iniciarMenu();
 if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
     cena.parar();
     cena.iniciar();
-    cena.geraSpriteRandom();
+
+    let vezesRepetidas = 0; 
+    var repeat = setInterval(() => {
+        
+        cena.geraSpriteRandom();
+        vezesRepetidas++;
+        if (vezesRepetidas === 10) {
+            clearInterval(repeat); 
+        }
+    } 
+    , 4000);
 
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
