@@ -1,3 +1,5 @@
+import Sprite from "../js/Sprite.js";
+
 export default class Cena {
     constructor(canvas, assets) {
         this.CANVAS = canvas;
@@ -74,6 +76,24 @@ export default class Cena {
     }
     addSprite(sprite) {
         this.sprites.push(sprite);
+    }
+    geraSpriteRandom() {
+        const sizeSpr = 16;
+        const vx = Math.random() * 50;
+        const vy = Math.random() * 50;
+
+        while (true) { //procura posicao valida
+            var l = Math.floor(Math.random() * (this.mapa.LINHAS - 1) + 1);
+            var c = Math.floor(Math.random() * (this.mapa.COLUNAS - 1) + 1);
+            console.log("l " + l);
+            console.log("c " + c);
+            if (this.mapa.tiles[l][c] == 0)
+                break;
+        }
+        const xSpr = l*this.mapa.SIZE + (Math.random() * (3*sizeSpr/2 - sizeSpr/2) + sizeSpr/2);
+        const ySpr = c*this.mapa.SIZE + (Math.random() * (3*sizeSpr/2 - sizeSpr/2) + sizeSpr/2);
+
+        this.addSprite(new Sprite({x: xSpr, y: ySpr, w: sizeSpr, h: sizeSpr, vx: vx, vy: vy, cena: this}));
     }
     verificaColisao() {
         for (let i=0; i < this.sprites.length - 1; i++) {
