@@ -85,8 +85,6 @@ export default class Cena {
         while (true) { //procura posicao valida
             var l = Math.floor(Math.random() * (this.mapa.LINHAS - 1) + 1);
             var c = Math.floor(Math.random() * (this.mapa.COLUNAS - 1) + 1);
-            console.log("l " + l);
-            console.log("c " + c);
             if (this.mapa.tiles[l][c] == 0)
                 break;
         }
