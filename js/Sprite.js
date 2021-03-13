@@ -39,14 +39,13 @@ export default class Sprite {
     }
     bateuParede(dt) {
         for (let i = this.gridSY; i <= this.gridIY; i++) {
-            this.bateuEsquerda(this.gridIX, i);
             this.bateuDireita(this.gridSX, i);
+            this.bateuEsquerda(this.gridIX, i);
         }
-        for (let i = this.gridSX; i <= this.gridIX; i++) {
-            this.bateuBaixo(i, this.gridSY);
-            this.bateuCima(i, this.gridIY);
+        for (let j = this.gridSX; j <= this.gridIX; j++) {
+            this.bateuBaixo(j, this.gridSY);
+            this.bateuCima(j, this.gridIY);
         }
-
     }
     bateuEsquerda(prGridX, prGridY) {
         if (this.vx > 0) {
@@ -58,9 +57,9 @@ export default class Sprite {
                     w: size,
                     h: size
                 };
-                if (this.isColidindo(parede)) {
+                if (this.isColidindo(parede) && this.cena.mapa.tiles[prGridY-1][prGridX] != 0) {
                     this.vx = 0;
-                    this.x = parede.x - parede.w/2 - this.w/2;
+                    this.x = parede.x - parede.w/2 - this.w/2 - 1;
                 }
             }
         }
@@ -77,7 +76,7 @@ export default class Sprite {
                 };
                 if (this.isColidindo(parede)) {
                     this.vx = 0;
-                    this.x = parede.x + parede.w/2 + this.w/2;
+                    this.x = this.x + 1; // parede.x + parede.w/2 + this.w/2 + 1;
                 }
             }
         }
@@ -94,7 +93,7 @@ export default class Sprite {
                 };
                 if (this.isColidindo(parede)) {
                     this.vy = 0;
-                    this.y = parede.y - parede.h/2 - this.h/2;
+                    this.y = this.y - 1; //parede.y - parede.h/2 - this.h/2 - 1;
                 }
             }
         }
@@ -111,7 +110,7 @@ export default class Sprite {
                 };
                 if (this.isColidindo(parede)) {
                     this.vy = 0;
-                    this.y = parede.y + parede.h/2 + this.h/2;
+                    this.y = this.y + 1; //parede.y + parede.h/2 + this.h/2 + 1;
                 }
             }
         }
