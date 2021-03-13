@@ -57,7 +57,7 @@ export default class Sprite {
                     w: size,
                     h: size
                 };
-                if (this.isColidindo(parede) && this.cena.mapa.tiles[prGridY-1][prGridX] != 0) {
+                if (this.isColidindo(parede)) {
                     this.vx = 0;
                     this.x = parede.x - parede.w/2 - this.w/2 - 1;
                 }
@@ -66,7 +66,7 @@ export default class Sprite {
     }
     bateuDireita(prGridX, prGridY) {
         if (this.vx < 0) {
-            const size = this.cena.mapa.SIZE;
+            const size = this.cena.mapa.SIZE; 
             if (this.cena.mapa.tiles[prGridY][prGridX] != 0) {
                 const parede = {
                     x: prGridX*size + size/2,
@@ -76,7 +76,7 @@ export default class Sprite {
                 };
                 if (this.isColidindo(parede)) {
                     this.vx = 0;
-                    this.x = this.x + 1; // parede.x + parede.w/2 + this.w/2 + 1;
+                    this.x = parede.x + parede.w/2 + this.w/2 + 1;
                 }
             }
         }
@@ -93,7 +93,7 @@ export default class Sprite {
                 };
                 if (this.isColidindo(parede)) {
                     this.vy = 0;
-                    this.y = this.y - 1; //parede.y - parede.h/2 - this.h/2 - 1;
+                    this.y = parede.y - parede.h/2 - this.h/2 - 1;
                 }
             }
         }
@@ -110,7 +110,7 @@ export default class Sprite {
                 };
                 if (this.isColidindo(parede)) {
                     this.vy = 0;
-                    this.y = this.y + 1; //parede.y + parede.h/2 + this.h/2 + 1;
+                    this.y = parede.y + parede.h/2 + this.h/2 + 1;
                 }
             }
         }

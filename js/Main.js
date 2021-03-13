@@ -13,17 +13,17 @@ const asset = new AssetManager();
 const mixer = new Mixer();
 const cena = new Cena(canvas, asset);
 
-const mapa = new Mapa();
+const mapa = new Mapa(12, 16, 32);
 mapa.carregaMapa(mapa1);
-
 cena.configuraMapa(mapa);
 
-cena.geraSpriteRandom();
+
 
 cena.iniciarMenu();
 if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
     cena.parar();
     cena.iniciar();
+    cena.geraSpriteRandom();
 
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
