@@ -4,11 +4,13 @@ import Mapa from "./Mapa.js";
 import Mixer from "./Mixer.js";
 import Sprite from "./Sprite.js";
 import {mapa1 as mapa1} from "../maps/mapa1.js";
+import InputManager from "./InputManager.js";
 
 const canvas = document.querySelector("canvas");
 canvas.width = 16*32;
 canvas.height = 12*32;
 
+const input = new InputManager();
 const asset = new AssetManager();
 const mixer = new Mixer(10);
 const cena = new Cena(canvas, asset);
@@ -19,6 +21,11 @@ asset.carregaImagem("tijolo_pedra01", "asset/pedra.jpg");
 asset.carregaImagem("tijolo_pedra02", "asset/tijolo_pedra2.png");
 asset.carregaImagem("tijolo_pedra03", "asset/piso_de_banheiro.png");
 asset.carregaAudio("colisao", "asset/colisao.wav");
+
+input.configTeclado({
+    "ArrowLeft": "ANDA_ESQUERDA",
+    "ArrowRight": "ANDA_DIREITA"
+})
 
 const mapa = new Mapa(12, 16, 32);
 mapa.carregaMapa(mapa1);
