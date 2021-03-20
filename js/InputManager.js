@@ -8,7 +8,7 @@ export default class InputManager {
         for (const tecla in input) {
             const acao = input[tecla];
             this.comandos.set(acao, false);
-            this.teclado.set(tecla, comando);
+            this.teclado.set(tecla, acao);
         }
         const that = this;
         addEventListener("keydown", (e) => {

@@ -24,13 +24,38 @@ asset.carregaAudio("colisao", "asset/colisao.wav");
 
 input.configTeclado({
     "ArrowLeft": "ANDA_ESQUERDA",
-    "ArrowRight": "ANDA_DIREITA"
+    "ArrowRight": "ANDA_DIREITA",
+    "ArrowUp": "ANDA_CIMA",
+    "ArrowDown": "ANDA_BAIXO"
 })
 
 const mapa = new Mapa(12, 16, 32);
 mapa.carregaMapa(mapa1);
 cena.configuraMapa(mapa);
 
+const pc = new Sprite({x: 2*mapa.SIZE - 16, y: (mapa.LINHAS-1)*mapa.SIZE - 16, color: "blue", cena: cena});
+pc.controle = function(dt) {
+    switch (true) {
+        case input.comandos.get("ANDA_ESQUERDA"):
+            this.vx = -50;
+            break;
+        case input.comandos.get("ANDA_DIREITA"):
+            this.vx = 50;
+            break;
+        default:
+            this.vx = 0;       
+    }
+    switch (true) {
+        case input.comandos.get("ANDA_CIMA"):
+            this.vy = -50;
+            break;
+        case input.comandos.get("ANDA_BAIXO"):
+            this.vy = 50;
+            break;
+        default:
+            this.vy = 0;       
+    }
+}
 
 
 //cena.iniciarMenu();
@@ -38,6 +63,9 @@ cena.configuraMapa(mapa);
 //    cena.parar();
     cena.iniciar();
 
+    cena.addSprite(pc);
+
+    /*
     let vezesRepetidas = 0; 
     var repeat = setInterval(() => {
         
@@ -48,6 +76,7 @@ cena.configuraMapa(mapa);
         }
     } 
     , 4000);
+    */
 
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
