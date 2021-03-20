@@ -13,7 +13,12 @@ export default class Sprite {
         this.gridIX = 0; //grid onde a ponta inf dir do bloco esta
         this.gridIY = 0; 
     }
+    controle(dt) {
+
+    }
     movimento(dt) {
+        this.controle(dt);
+
         this.x = this.x + this.vx*dt;
         this.y = this.y + this.vy*dt;
 
@@ -22,7 +27,7 @@ export default class Sprite {
         this.gridIX = Math.floor((this.x + this.w/2) / (this.cena?.mapa.SIZE ?? 1));
         this.gridIY = Math.floor((this.y + this.h/2) / (this.cena?.mapa.SIZE ?? 1));
         
-        this.bateuParede(dt);
+        this.bateuParede();
     }
 
     desenhaSprite(ctx) {
@@ -37,7 +42,7 @@ export default class Sprite {
             this.y + this.h/2 < spr.y - spr.h/2
         );
     }
-    bateuParede(dt) {
+    bateuParede() {
         for (let i = this.gridSY; i <= this.gridIY; i++) {
             this.bateuDireita(this.gridSX, i);
             this.bateuEsquerda(this.gridIX, i);
