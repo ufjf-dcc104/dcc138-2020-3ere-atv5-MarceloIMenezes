@@ -11,6 +11,8 @@ export default class Cena {
         this.mixer = null;
         this.game = null;
 
+        this.tParaProxSprite = 8;
+
         this.t0 = null;
         this.dt = 0;
         this.idAnim = null;
@@ -33,9 +35,13 @@ export default class Cena {
         this.verificaColisao()
         this.removeSprColisao();
         this.desenhaCena();
-            
-        if (t % 4 === 0)
-            this.geraSpriteRandom();
+        
+        if ((t/1000).toFixed(0) % 4 === 0) {
+            if ((t/1000).toFixed(0) == this.tParaProxSprite) {
+                this.geraSpriteRandom();
+                this.tParaProxSprite += 4;
+            }
+        }
         
         this.iniciar();
         this.t0 = t;
