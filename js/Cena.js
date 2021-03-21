@@ -9,6 +9,7 @@ export default class Cena {
         this.assets = assets;
         this.mapa = null;
         this.mixer = null;
+        this.game = null;
 
         this.t0 = 0;
         this.dt = 0;
