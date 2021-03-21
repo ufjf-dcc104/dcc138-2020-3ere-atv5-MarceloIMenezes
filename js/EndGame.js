@@ -1,3 +1,5 @@
+import Cena from "./Cena.js"
+
 export default class EndGame extends Cena {
     desenhaCena() {
         this.CTX.fillStyle = "black";

@@ -7,6 +7,8 @@ import {mapa1 as mapa1} from "../maps/mapa1.js";
 import InputManager from "./InputManager.js";
 import Game from "./Game.js";
 import TelaLoad from "./TelaLoad.js";
+import EndGame from "./EndGame.js";
+import CenaJogo from "./CenaJogo.js";
 
 const canvas = document.querySelector("canvas");
 canvas.width = 16*32;
@@ -14,12 +16,15 @@ canvas.height = 12*32;
 
 const input = new InputManager();
 const asset = new AssetManager();
-const mixer = new Mixer(10);
-const cena = new Cena(canvas, asset);
-const load = new TelaLoad(canvas, asset);
 const game = new Game(canvas, asset, input);
+const mixer = new Mixer(10);
 
-cena.adicionaMixer(mixer);
+const cena = new Cena(canvas, asset);
+const fase1 = new CenaJogo(canvas, asset);
+const load = new TelaLoad(canvas, asset);
+const endgame = new EndGame(canvas, asset);
+
+fase1.adicionaMixer(mixer);
 
 asset.carregaImagem("tijolo_pedra01", "asset/pedra.jpg");
 asset.carregaImagem("tijolo_pedra02", "asset/tijolo_pedra2.png");
@@ -36,11 +41,14 @@ input.configTeclado({
 
 const mapa = new Mapa(12, 16, 32);
 mapa.carregaMapa(mapa1);
-cena.configuraMapa(mapa);
+fase1.configuraMapa(mapa);
 game.addCena("load", load);
-game.addCena("fase1", cena);
+game.addCena("cena", cena);
+game.addCena("fase1", fase1);
+game.addCena("endGame", endgame);
 
-const pc = new Sprite({x: 2*mapa.SIZE - 16, y: (mapa.LINHAS-1)*mapa.SIZE - 16, color: "blue", cena: cena});
+const pc = new Sprite({x: 2*mapa.SIZE - 16, y: (mapa.LINHAS-1)*mapa.SIZE - 16, color: "blue", cena: fase1});
+pc.tags.add("pc");
 pc.controle = function(dt) {
     switch (true) {
         case input.comandos.get("ANDA_ESQUERDA"):
@@ -64,13 +72,9 @@ pc.controle = function(dt) {
     }
 }
 
-
-//cena.iniciarMenu();
-//if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
-//    cena.parar();
     game.iniciar();
 
-    cena.addSprite(pc);
+    fase1.addSprite(pc);
 
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
@@ -84,4 +88,3 @@ pc.controle = function(dt) {
                 break;
         }
     });
-//}
