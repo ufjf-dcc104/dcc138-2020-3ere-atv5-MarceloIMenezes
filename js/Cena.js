@@ -1,9 +1,9 @@
 import Sprite from "../js/Sprite.js";
 
 export default class Cena {
-    constructor(canvas, assets) {
+    constructor(canvas = null, assets = null) {
         this.CANVAS = canvas;
-        this.CTX = this.CANVAS.getContext("2d");
+        this.CTX = this.CANVAS?.getContext("2d");
         this.sprites = [];
         this.sprColisao = []; // vetor dos sprites que colidiram
         this.assets = assets;
@@ -11,6 +11,7 @@ export default class Cena {
         this.mixer = null;
         this.game = null;
 
+        this.exec = true;
         this.tParaProxSprite = 4;
 
         this.t0 = null;
@@ -18,11 +19,13 @@ export default class Cena {
         this.idAnim = null;
     }
     iniciar() {
+        this.exec = true;
         this.idAnim = requestAnimationFrame((t) => {this.quadro(t);});
         this.t0 = null;
         this.dt = 0;
     }
     parar() {
+        this.exec = false;
         cancelAnimationFrame(this.idAnim);
         this.t0 = null;
         this.dt = 0;
@@ -42,8 +45,9 @@ export default class Cena {
                 this.tParaProxSprite += 4;
             }
         }
-        
-        this.iniciar();
+        if (this.exec)
+            this.iniciar();
+
         this.t0 = t;
     }
     passo(dt) {
@@ -111,5 +115,8 @@ export default class Cena {
     }
     adicionaMixer(mixer) {
         this.mixer = mixer;
+    }
+    preparar() {
+        
     }
 }
