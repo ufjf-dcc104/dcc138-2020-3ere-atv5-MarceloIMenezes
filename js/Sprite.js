@@ -12,6 +12,8 @@ export default class Sprite {
         this.gridSY = 0;
         this.gridIX = 0; //grid onde a ponta inf dir do bloco esta
         this.gridIY = 0; 
+
+        this.tags = new Set();
     }
     controle(dt) {
 

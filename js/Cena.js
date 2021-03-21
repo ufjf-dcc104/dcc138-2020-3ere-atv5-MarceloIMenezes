@@ -11,7 +11,7 @@ export default class Cena {
         this.mixer = null;
         this.game = null;
 
-        this.tParaProxSprite = 8;
+        this.tParaProxSprite = 4;
 
         this.t0 = null;
         this.dt = 0;
@@ -78,7 +78,9 @@ export default class Cena {
         const xSpr = c*this.mapa.SIZE + (Math.random() * (3*sizeSpr/2 - sizeSpr/2) + sizeSpr/2);
         const ySpr = l*this.mapa.SIZE + (Math.random() * (3*sizeSpr/2 - sizeSpr/2) + sizeSpr/2);
 
-        this.addSprite(new Sprite({x: xSpr, y: ySpr, w: sizeSpr, h: sizeSpr, vx: vx, vy: vy, cena: this}));
+        const en = new Sprite({x: xSpr, y: ySpr, w: sizeSpr, h: sizeSpr, vx: vx, vy: vy, cena: this})
+        en.tags.add("en");
+        this.addSprite(en);
     }
     verificaColisao() {
         for (let i=0; i < this.sprites.length - 1; i++) {
