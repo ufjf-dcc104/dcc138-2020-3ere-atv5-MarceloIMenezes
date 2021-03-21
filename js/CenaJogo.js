@@ -16,6 +16,9 @@ export default class EndGame extends Cena {
         }
     }
     preparar() {
+        super.preparar();
+        this.tParaProxSprite = 4;
+
         const mapa = new Mapa(12, 16, 32);
         mapa.carregaMapa(mapa1);
         this.configuraMapa(mapa);
@@ -48,5 +51,14 @@ export default class EndGame extends Cena {
             }
         }
         this.addSprite(pc);
+    }
+    quadro(t) {
+        super.quadro(t);
+        if ((t/1000).toFixed(0) % 4 === 0) {
+            if ((t/1000).toFixed(0) == this.tParaProxSprite) {
+                this.geraSpriteRandom();
+                this.tParaProxSprite += 4;
+            }
+        }
     }
 }

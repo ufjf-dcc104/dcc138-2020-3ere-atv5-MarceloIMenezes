@@ -4,19 +4,9 @@ export default class Cena {
     constructor(canvas = null, assets = null) {
         this.CANVAS = canvas;
         this.CTX = this.CANVAS?.getContext("2d");
-        this.sprites = [];
-        this.sprColisao = []; // vetor dos sprites que colidiram
         this.assets = assets;
-        this.mapa = null;
-        this.mixer = null;
         this.game = null;
-
-        this.exec = true;
-        this.tParaProxSprite = 4;
-
-        this.t0 = null;
-        this.dt = 0;
-        this.idAnim = null;
+        this.preparar();
     }
     iniciar() {
         this.exec = true;
@@ -39,12 +29,6 @@ export default class Cena {
         this.removeSprColisao();
         this.desenhaCena();
         
-        if ((t/1000).toFixed(0) % 4 === 0) {
-            if ((t/1000).toFixed(0) == this.tParaProxSprite) {
-                this.geraSpriteRandom();
-                this.tParaProxSprite += 4;
-            }
-        }
         if (this.exec)
             this.iniciar();
 
@@ -117,6 +101,13 @@ export default class Cena {
         this.mixer = mixer;
     }
     preparar() {
-        
+        this.sprites = [];
+        this.sprColisao = []; // vetor dos sprites que colidiram
+        this.mapa = null;
+        this.mixer = null;
+        this.t0 = null;
+        this.dt = 0;
+        this.idAnim = null;
+        this.exec = true;
     }
 }
