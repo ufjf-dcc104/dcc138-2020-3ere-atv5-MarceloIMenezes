@@ -5,6 +5,7 @@ import Mixer from "./Mixer.js";
 import Sprite from "./Sprite.js";
 import {mapa1 as mapa1} from "../maps/mapa1.js";
 import InputManager from "./InputManager.js";
+import Game from "./Game.js";
 
 const canvas = document.querySelector("canvas");
 canvas.width = 16*32;
@@ -14,6 +15,7 @@ const input = new InputManager();
 const asset = new AssetManager();
 const mixer = new Mixer(10);
 const cena = new Cena(canvas, asset);
+const game = new Game(canvas, asset, input);
 
 cena.adicionaMixer(mixer);
 
@@ -32,6 +34,7 @@ input.configTeclado({
 const mapa = new Mapa(12, 16, 32);
 mapa.carregaMapa(mapa1);
 cena.configuraMapa(mapa);
+game.addCena("cena1", cena);
 
 const pc = new Sprite({x: 2*mapa.SIZE - 16, y: (mapa.LINHAS-1)*mapa.SIZE - 16, color: "blue", cena: cena});
 pc.controle = function(dt) {
@@ -39,8 +42,8 @@ pc.controle = function(dt) {
         case input.comandos.get("ANDA_ESQUERDA"):
             this.vx = -50;
             break;
-        case input.comandos.get("ANDA_DIREITA"):
-            this.vx = 50;
+            case input.comandos.get("ANDA_DIREITA"):
+                this.vx = 50;
             break;
         default:
             this.vx = 0;       
@@ -61,11 +64,11 @@ pc.controle = function(dt) {
 //cena.iniciarMenu();
 //if (asset.porcentagemCarregada() == 100 || asset.porcentagemCarregada() == -1) {
 //    cena.parar();
-    cena.iniciar();
+    game.iniciar();
 
     cena.addSprite(pc);
 
-    /*
+    
     let vezesRepetidas = 0; 
     var repeat = setInterval(() => {
         
@@ -76,16 +79,18 @@ pc.controle = function(dt) {
         }
     } 
     , 4000);
-    */
+    
 
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
             case "p":
             case "P":
-                cena.parar();
+                game.parar();
                 break;
-            default:
-                cena.iniciar();
+            case "d":
+            case "D":
+                game.iniciar();
+                break;
         }
     });
 //}
