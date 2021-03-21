@@ -11,7 +11,7 @@ export default class Cena {
         this.mixer = null;
         this.game = null;
 
-        this.t0 = 0;
+        this.t0 = null;
         this.dt = 0;
         this.idAnim = null;
     }
@@ -33,6 +33,9 @@ export default class Cena {
         this.verificaColisao()
         this.removeSprColisao();
         this.desenhaCena();
+            
+        if (t % 4 === 0)
+            this.geraSpriteRandom();
         
         this.iniciar();
         this.t0 = t;

@@ -17,7 +17,9 @@ export default class Game {
     }
     selecionaCena(chave) {
         if (this.cenas.has(chave))
+            this.parar();
             this.cenaAtual = this.cenas.get(chave);
+            this.iniciar();
     }
     iniciar() {
         this.cenaAtual?.iniciar();

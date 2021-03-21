@@ -20,7 +20,21 @@ export default class TelaLoad extends Cena {
             this.CTX.fillText("Aperte espaço para continuar", this.CANVAS.width/2, this.CANVAS.height/2);    
         }
     }
-        
+    quadro(t) {
+        this.t0 = this.t0 ?? t;
+        this.dt = (t - this.t0)/1000;
 
-       
+        if (this.assets?.acabouCarregar()) {
+            if (this.input.comandos.get("INICIA_JOGO")) {
+                this.game.selecionaCena("fase1");
+                return;
+            }
+        }
+        this.passo(this.dt);
+
+        this.desenhaCena();
+
+        this.iniciar();
+        this.t0 = t;
+    }
 }

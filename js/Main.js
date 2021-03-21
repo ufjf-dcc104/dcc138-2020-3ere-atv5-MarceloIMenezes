@@ -6,6 +6,7 @@ import Sprite from "./Sprite.js";
 import {mapa1 as mapa1} from "../maps/mapa1.js";
 import InputManager from "./InputManager.js";
 import Game from "./Game.js";
+import TelaLoad from "./TelaLoad.js";
 
 const canvas = document.querySelector("canvas");
 canvas.width = 16*32;
@@ -15,6 +16,7 @@ const input = new InputManager();
 const asset = new AssetManager();
 const mixer = new Mixer(10);
 const cena = new Cena(canvas, asset);
+const load = new TelaLoad(canvas, asset);
 const game = new Game(canvas, asset, input);
 
 cena.adicionaMixer(mixer);
@@ -28,13 +30,15 @@ input.configTeclado({
     "ArrowLeft": "ANDA_ESQUERDA",
     "ArrowRight": "ANDA_DIREITA",
     "ArrowUp": "ANDA_CIMA",
-    "ArrowDown": "ANDA_BAIXO"
+    "ArrowDown": "ANDA_BAIXO",
+    " ": "INICIA_JOGO"
 })
 
 const mapa = new Mapa(12, 16, 32);
 mapa.carregaMapa(mapa1);
 cena.configuraMapa(mapa);
-game.addCena("cena1", cena);
+game.addCena("load", load);
+game.addCena("fase1", cena);
 
 const pc = new Sprite({x: 2*mapa.SIZE - 16, y: (mapa.LINHAS-1)*mapa.SIZE - 16, color: "blue", cena: cena});
 pc.controle = function(dt) {
@@ -67,19 +71,6 @@ pc.controle = function(dt) {
     game.iniciar();
 
     cena.addSprite(pc);
-
-    
-    let vezesRepetidas = 0; 
-    var repeat = setInterval(() => {
-        
-        cena.geraSpriteRandom();
-        vezesRepetidas++;
-        if (vezesRepetidas === 100) {
-            clearInterval(repeat); 
-        }
-    } 
-    , 4000);
-    
 
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
