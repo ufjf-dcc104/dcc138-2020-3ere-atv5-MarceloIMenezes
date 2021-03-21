@@ -2,7 +2,6 @@ export default class AssetManager {
     constructor() {
         this.nTotalAssets = 0;
         this.nCarregado = 0;
-        this.pCar = -1;
 
         this.imagens = new Map();
         this.audios = new Map();
@@ -35,17 +34,12 @@ export default class AssetManager {
 
     porcentagemCarregada() {
         if (this.nTotalAssets > 0)
-            this.pCar = ((this.nCarregado/this.nTotalAssets)*100).toFixed(2);
-    }
-    imprimePorcentagem() {
-        if (this.pCar >= 0 && this.pCar != 100)
-            return this.pCar + "%";
-        else if (this.pCar == 100)
-            return "Pressione qualquer tecla para começar";     
+            return `${((this.nCarregado/this.nTotalAssets)*100).toFixed(2)}%`;
         return "Nada para ser carregado";
     }
+    
     acabouCarregar() {
-        if (this.pCar >= 100)
+        if (this.nTotalAssets === this.nCarregado)
             return true;
         return false;
     }
