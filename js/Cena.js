@@ -42,30 +42,6 @@ export default class Cena {
             sprite.movimento(dt);
         }
     }
-    iniciarMenu() {
-        this.idAnim = requestAnimationFrame((t) => {this.menu(t);});
-        this.t0 = null;
-        this.dt = 0;
-    }
-    menu(t) {
-        this.t0 = this.t0 ?? t;
-        this.dt = (t - this.t0)/1000;
-
-        this.CTX.fillStyle = "black";
-        this.CTX.fillRect(0, 0, this.CANVAS.width, this.CANVAS.height);
-
-        this.CTX.fillStyle = "white";
-        const pCar = this.assets.porcentagemCarregada();
-        if (pCar >= 0 && pCar != 100)
-            this.CTX.fillText(pCar + "%", this.CANVAS.width/2, this.CANVAS.height/2);
-        else if (pCar == 100)
-            this.CTX.fillText("Pressione qualquer tecla para começar", this.CANVAS.width/2, this.CANVAS.height/2);
-        else     
-            this.CTX.fillText("Nada para ser carregado", this.CANVAS.width/2, this.CANVAS.height/2);
-
-        this.iniciarMenu();
-        this.t0 = t;
-    }
     desenhaCena() {
         this.CTX.fillStyle = "grey";
         this.CTX.fillRect(0, 0, this.CANVAS.width, this.CANVAS.height);
