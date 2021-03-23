@@ -8,7 +8,8 @@ export default class EndGame extends Cena {
         this.CTX.fillStyle = "lightgreen";
         this.CTX.textAlign = "center";
         this.CTX.font = "20px Comic Sans MS";
-        this.CTX.fillText("PERDESTE", this.CANVAS.width/2, this.CANVAS.height/2);    
+        this.CTX.fillText("PERDESTE", this.CANVAS.width/2, this.CANVAS.height/2);
+        this.CTX.fillText("PONTUAÇÃO: " + this.game.pontuacao, this.CANVAS.width/2, this.CANVAS.height/2 + 30);
     }
 
 }

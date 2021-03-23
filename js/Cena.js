@@ -44,6 +44,12 @@ export default class Cena {
         this.CTX.fillRect(0, 0, this.CANVAS.width, this.CANVAS.height);
 
         this.mapa.desenhaTile(this.CTX, this.assets);
+        
+        this.CTX.fillStyle = "lightgreen";
+        this.CTX.textAlign = "center";
+        this.CTX.font = "15px Comic Sans MS";
+        this.CTX.fontWeight = "bolder";
+        this.CTX.fillText("Pontuação: " + this.game.pontuacao, 2*this.mapa.SIZE+this.mapa.SIZE/2, this.mapa.SIZE/2+5);
 
         for (const sprite of this.sprites) {
             sprite.desenhaSprite(this.CTX);
