@@ -6,14 +6,24 @@ import {mapa1 as mapa1} from "../maps/mapa1.js";
 
 export default class EndGame extends Cena {
     addSprColisao(sprA, sprB) {
-        if (!this.sprColisao.includes(sprA))
-            this.sprColisao.push(sprA);
-        if (!this.sprColisao.includes(sprB))
-            this.sprColisao.push(sprB);
+        if (sprA.tags.has("coin") || sprB.tags.has("coin")) {
+            this.mixer.play(this.assets.audio("coin"));
+            this.game.pontuacao++;
+            if (sprA.tags.has("coin"))
+                this.verSprColisao(sprA);
+            else
+                this.verSprColisao(sprB);
+            return;    
+        }
         if (sprA.tags.has("pc") && sprB.tags.has("en") ||
             sprA.tags.has("en") && sprB.tags.has("pc")) {
                 this.game.selecionaCena("endGame");
+                return;
         }
+
+        this.mixer.play(this.assets.audio("colisao"));
+        this.verSprColisao(sprA);
+        this.verSprColisao(sprB);
     }
     preparar() {
         super.preparar();
@@ -51,6 +61,7 @@ export default class EndGame extends Cena {
             }
         }
         this.addSprite(pc);
+        this.addCoin();
     }
     quadro(t) {
         super.quadro(t);
@@ -75,8 +86,19 @@ export default class EndGame extends Cena {
         const xSpr = c*this.mapa.SIZE + (Math.random() * (3*sizeSpr/2 - sizeSpr/2) + sizeSpr/2);
         const ySpr = l*this.mapa.SIZE + (Math.random() * (3*sizeSpr/2 - sizeSpr/2) + sizeSpr/2);
 
-        const en = new Sprite({x: xSpr, y: ySpr, w: sizeSpr, h: sizeSpr, vx: vx, vy: vy, cena: this})
+        const en = new Sprite({x: xSpr, y: ySpr, w: sizeSpr, h: sizeSpr, vx: vx, vy: vy, cena: this});
         en.tags.add("en");
         this.addSprite(en);
+    }
+    addCoin() {
+        for (let i=0; i<this.mapa.LINHAS; i++) {
+            for (let j=0; j<this.mapa.COLUNAS; j++) {
+                if (this.mapa.tiles[i][j] == "c") {
+                    const coin = new Sprite({x: j*this.mapa.SIZE+this.mapa.SIZE/2, y: i*this.mapa.SIZE+this.mapa.SIZE/2, w: this.mapa.SIZE/4, h: this.mapa.SIZE/2, color: "yellow", cena: this});
+                    coin.tags.add("coin");
+                    this.addSprite(coin);
+                }
+            }
+        }
     }
 }

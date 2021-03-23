@@ -57,17 +57,18 @@ export default class Cena {
         for (let i=0; i < this.sprites.length - 1; i++) {
             for (let j= i + 1; j < this.sprites.length; j++) {
                 if (this.sprites[i].isColidindo(this.sprites[j])) {
-                    this.mixer.play(this.assets.audio("colisao"));
                     this.addSprColisao(this.sprites[i], this.sprites[j]);
                 }
             }
         }
     }
     addSprColisao(sprA, sprB) {
-        if (!this.sprColisao.includes(sprA))
-            this.sprColisao.push(sprA);
-        if (!this.sprColisao.includes(sprB))
-            this.sprColisao.push(sprB);
+        this.verSprColisao(sprA);
+        this.verSprColisao(sprB);
+    }
+    verSprColisao(spr) {
+        if (!this.sprColisao.includes(spr))
+            this.sprColisao.push(spr);
     }
     removeSprColisao() {
         for (const spr of this.sprColisao) {

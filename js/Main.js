@@ -26,6 +26,7 @@ asset.carregaImagem("tijolo_pedra01", "asset/pedra.jpg");
 asset.carregaImagem("tijolo_pedra02", "asset/tijolo_pedra2.png");
 asset.carregaImagem("tijolo_pedra03", "asset/piso_de_banheiro.png");
 asset.carregaAudio("colisao", "asset/colisao.wav");
+asset.carregaAudio("coin", "asset/coin.wav");
 
 input.configTeclado({
     "ArrowLeft": "ANDA_ESQUERDA",
