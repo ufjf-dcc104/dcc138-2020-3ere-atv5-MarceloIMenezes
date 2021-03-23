@@ -57,7 +57,7 @@ export default class Sprite {
     bateuEsquerda(prGridX, prGridY) {
         if (this.vx > 0) {
             const size = this.cena.mapa.SIZE;
-            if (this.cena.mapa.tiles[prGridY][prGridX] != 0) {
+            if (this.cena.mapa.tiles[prGridY][prGridX] == 1) {
                 const parede = {
                     x: prGridX*size + size/2,
                     y: prGridY*size + size/2,
@@ -74,7 +74,7 @@ export default class Sprite {
     bateuDireita(prGridX, prGridY) {
         if (this.vx < 0) {
             const size = this.cena.mapa.SIZE; 
-            if (this.cena.mapa.tiles[prGridY][prGridX] != 0) {
+            if (this.cena.mapa.tiles[prGridY][prGridX] == 1) {
                 const parede = {
                     x: prGridX*size + size/2,
                     y: prGridY*size + size/2,
@@ -91,7 +91,7 @@ export default class Sprite {
     bateuCima(prGridX, prGridY) {
         if (this.vy > 0) {
             const size = this.cena.mapa.SIZE;
-            if (this.cena.mapa.tiles[prGridY][prGridX] != 0) {
+            if (this.cena.mapa.tiles[prGridY][prGridX] == 1) {
                 const parede = {
                     x: prGridX*size + size/2,
                     y: prGridY*size + size/2,
@@ -108,7 +108,7 @@ export default class Sprite {
     bateuBaixo(prGridX, prGridY) {
         if (this.vy < 0) {
             const size = this.cena.mapa.SIZE;
-            if (this.cena.mapa.tiles[prGridY][prGridX] != 0) {
+            if (this.cena.mapa.tiles[prGridY][prGridX] == 1) {
                 const parede = {
                     x: prGridX*size + size/2,
                     y: prGridY*size + size/2,

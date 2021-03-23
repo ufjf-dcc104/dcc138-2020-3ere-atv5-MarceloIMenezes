@@ -1,3 +1,5 @@
+import Sprite from "./Sprite.js";
+
 export default class Mapa {
     constructor(linhas=12, colunas=16, size=32) {
         this.LINHAS = linhas;
@@ -15,6 +17,7 @@ export default class Mapa {
         for (let i=0; i<this.LINHAS; i++) {
             for (let j=0; j<this.COLUNAS; j++) {
                 switch (this.tiles[i][j]) {
+                    case "c":
                     case 0:
                         ctx.drawImage(asset.imagem("tijolo_pedra03"), j*this.SIZE, i*this.SIZE, this.SIZE, this.SIZE);
                         break;
