@@ -4,6 +4,7 @@ import Game from "./Game.js";
 import TelaLoad from "./TelaLoad.js";
 import EndGame from "./EndGame.js";
 import CenaJogo from "./CenaJogo.js";
+import EndGameVit from "./EndGameVit.js";
 
 const canvas = document.querySelector("canvas");
 canvas.width = 16*32;
@@ -17,10 +18,12 @@ const game = new Game(canvas, asset, input);
 const fase1 = new CenaJogo(canvas);
 const load = new TelaLoad(canvas);
 const endgame = new EndGame(canvas);
+const endgamevit = new EndGameVit(canvas);
 
 game.addCena("load", load);
 game.addCena("fase1", fase1);
 game.addCena("endGame", endgame);
+game.addCena("endGameVit", endgamevit);
 
 asset.carregaImagem("tijolo_pedra01", "asset/pedra.jpg");
 asset.carregaImagem("tijolo_pedra02", "asset/tijolo_pedra2.png");

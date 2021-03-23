@@ -18,6 +18,8 @@ export default class Mapa {
             for (let j=0; j<this.COLUNAS; j++) {
                 switch (this.tiles[i][j]) {
                     case "c":
+                    case "pc":
+                    case "fim":
                     case 0:
                         ctx.drawImage(asset.imagem("tijolo_pedra03"), j*this.SIZE, i*this.SIZE, this.SIZE, this.SIZE);
                         break;

@@ -6,7 +6,8 @@ import {mapa1 as mapa1} from "../maps/mapa1.js";
 
 export default class EndGame extends Cena {
     addSprColisao(sprA, sprB) {
-        if (sprA.tags.has("coin") || sprB.tags.has("coin")) {
+        if (sprA.tags.has("coin") && !sprB.tags.has("en") || 
+            !sprA.tags.has("en") && sprB.tags.has("coin")) {
             this.mixer.play(this.assets.audio("coin"));
             this.game.pontuacao++;
             if (sprA.tags.has("coin"))
@@ -15,15 +16,21 @@ export default class EndGame extends Cena {
                 this.verSprColisao(sprB);
             return;    
         }
+        if (sprA.tags.has("pc") && sprB.tags.has("fim") ||
+            sprA.tags.has("fim") && sprB.tags.has("pc")) {
+                this.game.selecionaCena("endGameVit");
+                return;
+        }
         if (sprA.tags.has("pc") && sprB.tags.has("en") ||
             sprA.tags.has("en") && sprB.tags.has("pc")) {
                 this.game.selecionaCena("endGame");
                 return;
         }
-
-        this.mixer.play(this.assets.audio("colisao"));
-        this.verSprColisao(sprA);
-        this.verSprColisao(sprB);
+        if (sprA.tags.has("en") && sprB.tags.has("en")) {
+            this.mixer.play(this.assets.audio("colisao"));
+            this.verSprColisao(sprA);
+            this.verSprColisao(sprB);
+        }
     }
     preparar() {
         super.preparar();
@@ -36,32 +43,8 @@ export default class EndGame extends Cena {
         const mixer = new Mixer(10);
         this.adicionaMixer(mixer);
 
-        const pc = new Sprite({x: 2*this.mapa.SIZE - 16, y: (this.mapa.LINHAS-1)*this.mapa.SIZE - 16, color: "blue", cena: this});
-        pc.tags.add("pc");
-        pc.controle = function() {
-            switch (true) {
-                case this.cena.game.input.comandos.get("ANDA_ESQUERDA"):
-                    this.vx = -50;
-                    break;
-                    case this.cena.game.input.comandos.get("ANDA_DIREITA"):
-                        this.vx = 50;
-                    break;
-                default:
-                    this.vx = 0;       
-            }
-            switch (true) {
-                case this.cena.game.input.comandos.get("ANDA_CIMA"):
-                    this.vy = -50;
-                    break;
-                case this.cena.game.input.comandos.get("ANDA_BAIXO"):
-                    this.vy = 50;
-                    break;
-                default:
-                    this.vy = 0;       
-            }
-        }
-        this.addSprite(pc);
-        this.addCoin();
+        
+        this.addSpriteNoMapa();
     }
     quadro(t) {
         super.quadro(t);
@@ -90,13 +73,47 @@ export default class EndGame extends Cena {
         en.tags.add("en");
         this.addSprite(en);
     }
-    addCoin() {
+    addSpriteNoMapa() {
         for (let i=0; i<this.mapa.LINHAS; i++) {
             for (let j=0; j<this.mapa.COLUNAS; j++) {
-                if (this.mapa.tiles[i][j] == "c") {
-                    const coin = new Sprite({x: j*this.mapa.SIZE+this.mapa.SIZE/2, y: i*this.mapa.SIZE+this.mapa.SIZE/2, w: this.mapa.SIZE/4, h: this.mapa.SIZE/2, color: "yellow", cena: this});
-                    coin.tags.add("coin");
-                    this.addSprite(coin);
+                switch (this.mapa.tiles[i][j]) {
+                    case "c":
+                        const coin = new Sprite({x: j*this.mapa.SIZE+this.mapa.SIZE/2, y: i*this.mapa.SIZE+this.mapa.SIZE/2, w: this.mapa.SIZE/4, h: this.mapa.SIZE/2, color: "yellow", cena: this});
+                        coin.tags.add("coin");
+                        this.addSprite(coin);
+                        break;
+                    case "pc":
+                        const pc = new Sprite({x: j*this.mapa.SIZE+this.mapa.SIZE/2, y: i*this.mapa.SIZE+this.mapa.SIZE/2, color: "blue", cena: this});
+                        pc.tags.add("pc");
+                        pc.controle = function() {
+                            switch (true) {
+                                case this.cena.game.input.comandos.get("ANDA_ESQUERDA"):
+                                    this.vx = -50;
+                                    break;
+                                    case this.cena.game.input.comandos.get("ANDA_DIREITA"):
+                                        this.vx = 50;
+                                    break;
+                                default:
+                                    this.vx = 0;       
+                            }
+                            switch (true) {
+                                case this.cena.game.input.comandos.get("ANDA_CIMA"):
+                                    this.vy = -50;
+                                    break;
+                                case this.cena.game.input.comandos.get("ANDA_BAIXO"):
+                                    this.vy = 50;
+                                    break;
+                                default:
+                                    this.vy = 0;       
+                            }
+                        }
+                        this.addSprite(pc);
+                        break;
+                    case "fim":
+                        const fim = new Sprite({x: j*this.mapa.SIZE+this.mapa.SIZE/2, y: i*this.mapa.SIZE+this.mapa.SIZE/2, color: "purple", cena: this});
+                        fim.tags.add("fim");
+                        this.addSprite(fim);
+                        break;
                 }
             }
         }
