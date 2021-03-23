@@ -78,7 +78,7 @@ export default class EndGame extends Cena {
             for (let j=0; j<this.mapa.COLUNAS; j++) {
                 switch (this.mapa.tiles[i][j]) {
                     case "c":
-                        const coin = new Sprite({x: j*this.mapa.SIZE+this.mapa.SIZE/2, y: i*this.mapa.SIZE+this.mapa.SIZE/2, w: this.mapa.SIZE/4, h: this.mapa.SIZE/2, color: "yellow", cena: this});
+                        const coin = new Sprite({x: j*this.mapa.SIZE+this.mapa.SIZE/2, y: i*this.mapa.SIZE+this.mapa.SIZE/2, w: this.mapa.SIZE/4, h: this.mapa.SIZE/2, color: "yellow", cena: this, imagem: "goldCoin"});
                         coin.tags.add("coin");
                         this.addSprite(coin);
                         break;

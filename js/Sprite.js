@@ -1,5 +1,5 @@
 export default class Sprite {
-    constructor({x=60, y=100, w=16, h=16, vx=0, vy=0, color="red", cena=null} = {}) {
+    constructor({x=60, y=100, w=16, h=16, vx=0, vy=0, color="red", cena=null, imagem=null} = {}) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -8,6 +8,8 @@ export default class Sprite {
         this.vy = vy;
         this.color = color;
         this.cena = cena;
+        this.imagem = imagem;
+
         this.gridSX = 0; //grid onde a ponta sup esq do bloco esta
         this.gridSY = 0;
         this.gridIX = 0; //grid onde a ponta inf dir do bloco esta
@@ -33,8 +35,12 @@ export default class Sprite {
     }
 
     desenhaSprite(ctx) {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x - this.w/2, this.y - this.h/2, this.w, this.h);
+        if (this.imagem === null) {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x - this.w/2, this.y - this.h/2, this.w, this.h);
+            return;
+        }
+        ctx.drawImage(this.cena.assets.imagem(this.imagem), this.x-this.cena.mapa.SIZE/2, this.y-this.cena.mapa.SIZE/2, this.cena.mapa.SIZE, this.cena.mapa.SIZE);
     }
     isColidindo(spr) {
         return !(
