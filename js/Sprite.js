@@ -40,7 +40,7 @@ export default class Sprite {
             ctx.fillRect(this.x - this.w/2, this.y - this.h/2, this.w, this.h);
             return;
         }
-        ctx.drawImage(this.cena.assets.imagem(this.imagem), this.x-this.cena.mapa.SIZE/2, this.y-this.cena.mapa.SIZE/2, this.cena.mapa.SIZE, this.cena.mapa.SIZE);
+        ctx.drawImage(this.cena.assets.imagem(this.imagem), 0, 0,this.cena.mapa.SIZE,this.cena.mapa.SIZE,this.x-this.cena.mapa.SIZE/3, this.y-this.cena.mapa.SIZE/2, this.w+this.cena.mapa.SIZE/2, this.h+this.cena.mapa.SIZE/2);
     }
     isColidindo(spr) {
         return !(

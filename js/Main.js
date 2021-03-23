@@ -31,7 +31,7 @@ asset.carregaImagem("tijolo_pedra03", "asset/piso_de_banheiro.png");
 asset.carregaAudio("colisao", "asset/colisao.wav");
 asset.carregaAudio("coin", "asset/coin.wav");
 asset.carregaImagem("goldCoin", "asset/goldCoin9.png");
-
+asset.carregaImagem("joia", "asset/joia.png");
 
 input.configTeclado({
     "ArrowLeft": "ANDA_ESQUERDA",

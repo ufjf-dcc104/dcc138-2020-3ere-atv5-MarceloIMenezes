@@ -110,7 +110,7 @@ export default class EndGame extends Cena {
                         this.addSprite(pc);
                         break;
                     case "fim":
-                        const fim = new Sprite({x: j*this.mapa.SIZE+this.mapa.SIZE/2, y: i*this.mapa.SIZE+this.mapa.SIZE/2, color: "purple", cena: this});
+                        const fim = new Sprite({x: j*this.mapa.SIZE+this.mapa.SIZE/2, y: i*this.mapa.SIZE+this.mapa.SIZE/2, color: "purple", cena: this, imagem: "joia"});
                         fim.tags.add("fim");
                         this.addSprite(fim);
                         break;
