@@ -1,10 +1,10 @@
-import Cena from "./Cena.js"
+import Cena from "./Cena.js";
 import Mapa from "./Mapa.js";
 import Mixer from "./Mixer.js";
 import Sprite from "./Sprite.js";
-import {mapa1 as mapa1} from "../maps/mapa1.js";
+import {mapa2 as mapa2} from "../maps/mapa2.js";
 
-export default class EndGame extends Cena {
+export default class CenaJogo2 extends Cena {
     addSprColisao(sprA, sprB) {
         if (sprA.tags.has("coin") && !sprB.tags.has("en") || 
             !sprA.tags.has("en") && sprB.tags.has("coin")) {
@@ -18,7 +18,7 @@ export default class EndGame extends Cena {
         }
         if (sprA.tags.has("pc") && sprB.tags.has("fim") ||
             sprA.tags.has("fim") && sprB.tags.has("pc")) {
-                this.game.selecionaCena("fase2");
+                this.game.selecionaCena("endGameVit");
                 return;
         }
         if (sprA.tags.has("pc") && sprB.tags.has("en") ||
@@ -41,7 +41,7 @@ export default class EndGame extends Cena {
         super.preparar();
         this.tParaProxSprite = 0;
 
-        this.selecionaMapa(mapa1);
+        this.selecionaMapa(mapa2);
 
         const mixer = new Mixer(10);
         this.adicionaMixer(mixer);
@@ -62,7 +62,6 @@ export default class EndGame extends Cena {
         const sizeSpr = 16;
         const vx = Math.random() * (50 + 50) - 50;
         const vy = Math.random() * (50 + 50) - 50;
-
         while (true) { //procura posicao valida
             var l = Math.floor(Math.random() * (this.mapa.LINHAS - 1) + 1);
             var c = Math.floor(Math.random() * (this.mapa.COLUNAS - 1) + 1);

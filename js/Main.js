@@ -5,6 +5,7 @@ import TelaLoad from "./TelaLoad.js";
 import EndGame from "./EndGame.js";
 import CenaJogo from "./CenaJogo.js";
 import EndGameVit from "./EndGameVit.js";
+import CenaJogo2 from "./CenaJogo2.js";
 
 const canvas = document.querySelector("canvas");
 canvas.width = 16*32;
@@ -16,12 +17,14 @@ const game = new Game(canvas, asset, input);
 
 
 const fase1 = new CenaJogo(canvas);
+const fase2 = new CenaJogo2(canvas);
 const load = new TelaLoad(canvas);
 const endgame = new EndGame(canvas);
 const endgamevit = new EndGameVit(canvas);
 
 game.addCena("load", load);
 game.addCena("fase1", fase1);
+game.addCena("fase2", fase2);
 game.addCena("endGame", endgame);
 game.addCena("endGameVit", endgamevit);
 
